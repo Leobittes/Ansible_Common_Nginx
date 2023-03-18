@@ -1,0 +1,36 @@
+- name: update cache repo
+  apt:
+    update_cache: yes
+
+- name: update SO
+  apt:
+    name: "*"
+    state: latest
+
+- name: Set a hostname
+  hostname:
+    name: lab-ansible-ngnix-common           
+
+- name: install packages
+  apt:
+    name:
+      - vim
+      - net-tools
+      - htop
+      - nmap
+      - wget
+      - curl
+      - telnet
+      #- btop
+
+- name: Add users company
+  user:
+    name: leobittes
+    shell: /bin/bash
+    home: /home/leobittes
+
+- name: Add user company for sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    line: "leobittes    ALL=(ALL:ALL) NOPASSWD: ALL"    
+           
